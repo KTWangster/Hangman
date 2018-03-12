@@ -17,29 +17,15 @@ Author: Katherine Wang
 
 import random
 import string
+# -----------ADDED LIST (OR ARRAY?) OF WORDS AND RANDOMLY GENERATED SECRETWORD---------
+# Array of 10 words.
+wordList = ["copper", "unite", "decisive", "notice", "branch", "explain", "educate", "guess", "enter", "available"]
 
-WORDLIST_FILENAME = "words.txt"
+# Returns a random word from wordList
+def chooseWord(wordList):
+    return random.choice(wordList)
 
-# Loads list of lowercase words from a seperate file.
-def loadWords():
-    print("Loading word list from file...")
-    # inFile: file
-    inFile = open(WORDLIST_FILENAME, 'r')
-    # line: string
-    line = inFile.readline()
-    # wordlist: list of strings
-    wordlist = line.split()
-    print("  ", len(wordlist), "words loaded.")
-    return wordlist
-
-def chooseWord(wordlist):
-    # Returns a random word from wordList
-    return random.choice(wordlist)
-# -----------------------------------
-
-# Loads list of words into the variable wordlist
-# so that it can be accessed from anywhere in the program
-wordlist = loadWords()
+# ---------------------------
 
 # Function returns boolean if letters of secretWord in lettersGuessed
 def isWordGuessed(secretWord, lettersGuessed):
@@ -60,10 +46,10 @@ def getGuessedWord(secretWord, lettersGuessed):
     for char in secretWord:
         # If letter is guessed, add it to ouput string...
         if char in lettersGuessed:
-            remainingWord += char + " "
+            remainingWord += char
         # ...else add an underscore.
         else:
-            remainingWord += "_ "
+            remainingWord += "_"
     # Return string of letters and underscores of what letters in secretWord have been guessed so far.
     return remainingWord
 
@@ -147,5 +133,5 @@ def hangman(secretWord):
     if guessesLeft == 0:
         print("Sorry, you ran out of guesses! The word was: " + secretWord)
 
-secretWord = chooseWord(wordlist).lower()
+secretWord = chooseWord(wordList).lower()
 hangman(secretWord)
